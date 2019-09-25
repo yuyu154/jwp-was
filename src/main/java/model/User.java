@@ -13,6 +13,10 @@ public class User {
         this.email = email;
     }
 
+    public Boolean authenticate(User user) {
+        return (this.userId.equals(user.userId)) && (this.password.equals(user.password));
+    }
+
     public String getUserId() {
         return userId;
     }
