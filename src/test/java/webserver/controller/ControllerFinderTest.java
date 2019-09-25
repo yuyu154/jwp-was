@@ -1,6 +1,6 @@
 package webserver.controller;
 
-import http.HttpRequest;
+import http.request.HttpRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import testhelper.Common;

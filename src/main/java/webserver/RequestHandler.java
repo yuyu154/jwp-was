@@ -1,6 +1,9 @@
 package webserver;
 
 import http.*;
+import http.request.HttpRequest;
+import http.request.HttpRequestBody;
+import http.request.HttpRequestHeader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.IOUtils;
@@ -57,5 +60,11 @@ public class RequestHandler implements Runnable {
             return new HttpRequest(header, httpRequestBody);
         }
         return new HttpRequest(header);
+    }
+
+    private HttpRequest readRequestUrl1(InputStream in) throws IOException {
+        InputStreamReader inputStreamReader = new InputStreamReader(in);
+        BufferedReader br = new BufferedReader(inputStreamReader);
+        return null;
     }
 }

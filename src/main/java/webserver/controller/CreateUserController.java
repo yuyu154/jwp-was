@@ -1,6 +1,6 @@
 package webserver.controller;
 
-import http.HttpRequest;
+import http.request.HttpRequest;
 import http.HttpResponse;
 import model.UserController;
 

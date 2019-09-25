@@ -1,7 +1,7 @@
 package webserver.controller;
 
-import http.HttpRequest;
-import http.HttpRequestHeader;
+import http.request.HttpRequest;
+import http.request.HttpRequestHeader;
 import http.HttpResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

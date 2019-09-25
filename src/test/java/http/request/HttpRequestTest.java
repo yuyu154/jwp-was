@@ -1,8 +1,14 @@
-package http;
+package http.request;
 
+import http.request.HttpRequest;
+import http.request.HttpRequestBody;
+import http.request.HttpRequestHeader;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import testhelper.Common;
+import utils.IOUtils;
 
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,14 +18,10 @@ public class HttpRequestTest {
 
     @Test
     @DisplayName("HTTP GET 요청")
-    public void httpGetRequest() {
-        List<String> inputs = Arrays.asList(
-                "GET /user/create?userId=javajigi&password=password HTTP/1.1",
-                "Host: localhost:8080",
-                "Connection: keep-alive");
-        HttpRequestHeader httpRequestHeader = new HttpRequestHeader(inputs);
+    public void httpGetRequest() throws IOException {
+        List<String> inputs = IOUtils.parseAllLine(Common.getBufferedReader("HTTP_GET_INDEX_HTML.txt"));
+        HttpRequest httpRequest = HttpRequestMaker.parseInputs(inputs);
 
-        HttpRequest httpRequest = new HttpRequest(httpRequestHeader);
         assertThat(httpRequest.getMethod()).isEqualTo("GET");
         assertThat(httpRequest.getResourcePath()).isEqualTo("/user/create");
         assertThat(httpRequest.getHeader("Host")).isEqualTo("localhost:8080");
@@ -47,20 +49,5 @@ public class HttpRequestTest {
         assertThat(httpRequest.getHeader("Content-Length")).isEqualTo("46");
         assertThat(httpRequest.getHeader("Content-Type")).isEqualTo("application/x-www-form-urlencoded");
         assertThat(httpRequest.getParameter("password")).isEqualTo("password");
-    }
-
-    @Test
-    @DisplayName("루트 URL에 대하여 index.html 반환")
-    public void httpGetRequestIfRootUri() {
-        List<String> inputs = Arrays.asList(
-                "GET / HTTP/1.1",
-                "Host: localhost:8080",
-                "Connection: keep-alive");
-        HttpRequestHeader httpRequestHeader = new HttpRequestHeader(inputs);
-
-        HttpRequest httpRequest = new HttpRequest(httpRequestHeader);
-        assertThat(httpRequest.getMethod()).isEqualTo("GET");
-        assertThat(httpRequest.getResourcePath()).isEqualTo("/index.html");
-        assertThat(httpRequest.getHeader("Host")).isEqualTo("localhost:8080");
     }
 }
