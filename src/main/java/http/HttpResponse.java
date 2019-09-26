@@ -40,7 +40,7 @@ public class HttpResponse {
     }
 
     public void forward(String path) throws IOException, URISyntaxException {
-        logger.debug("Forwarding Path : {}", path);
+        logger.debug("Forward Path : {}", path);
 
         byte[] body = FileIoUtils.loadFileFromClasspath(path);
         addHeader("Content-Length", Integer.toString(body.length));
@@ -74,7 +74,6 @@ public class HttpResponse {
 
     private void writeStartLine(StatusCode statusCode) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
-
         stringBuilder.append(HTTP_VERSION);
         stringBuilder.append(statusCode.getStatusCode());
         stringBuilder.append(" ");
